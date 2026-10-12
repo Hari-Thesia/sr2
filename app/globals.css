@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; background: #121316; }
+body { background: #121316; color: #e8e6e1; -webkit-font-smoothing: antialiased; }
+
+/* slow shimmer on the lake block */
+@keyframes ripple {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 120px 0, -90px 0; }
+}
+.lake-surface {
+  background:
+    repeating-linear-gradient(100deg, rgba(255,255,255,.05) 0 2px, transparent 2px 22px),
+    radial-gradient(120% 120% at 30% 20%, #1d4f57 0%, #12333b 55%, #0c2128 100%);
+  background-size: 120px 100%, 100% 100%;
+  animation: ripple 24s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .lake-surface { animation: none; }
+  * { transition-duration: .01ms !important; }
+}
+:focus-visible { outline: 2px solid #E0C068; outline-offset: 2px; }
+
+/* slow cinematic push-in on the hero photo */
+@keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.12); } }
+.kenburns { animation: kenburns 28s ease-out forwards; }
+@media (prefers-reduced-motion: reduce) { .kenburns { animation: none; } }
+
+@keyframes fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.fade-in { animation: fadein .4s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .fade-in { animation: none; } }
